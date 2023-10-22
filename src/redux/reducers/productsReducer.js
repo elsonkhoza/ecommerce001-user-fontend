@@ -7,7 +7,7 @@ import {
 export const productsReducer = (state = [], { type, payload }) => {
   switch (type) {
     case SET_PRODUCTS:
-      return [...state, payload];
+      return payload;
     default: 
       return state;
   }
