@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSingleProduct } from "../api/productsApi";
@@ -11,27 +11,29 @@ const items = [
     {
       key: '1',
       label: 'Reviews',
-      children: 'Content of Tab Pane 1',
+      children: 'Product Reviews',
     },
     {
       key: '2',
       label: 'Details',
-      children: 'Content of Tab Pane 2',
+      children: 'Product Details',
     },
     {
       key: '3',
       label: 'Sizes',
-      children: 'Content of Tab Pane 3',
+      children: 'Product Size',
     },
   ];
 function Product() {
   const { id } = useParams();
+  const {rate,setRate}=useState(0);
   let product = useSelector((state) => state.singleProduct);
   const dispatch = useDispatch();
   console.log("The ID", id);
   const fetchProduct = async (id) => {
     const data = await getSingleProduct(id);
     dispatch(selectProduct(data));
+    setRate((product.rating).rate);
   };
   console.log("selected: ", product);
 
@@ -50,7 +52,7 @@ function Product() {
         <Col span={12}>
             <Flex style={{paddingLeft:20}} gap={'middle'} vertical>
             <h1>{product.title}</h1>
-            <Rate disabled defaultValue={product.rating.rate} />
+            <Rate disabled defaultValue={rate} />
             <Typography.Text>
                 {"Categories: "+"Men, Clothing, Begs"}
                 </Typography.Text>
