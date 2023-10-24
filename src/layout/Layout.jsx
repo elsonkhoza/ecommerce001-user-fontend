@@ -9,6 +9,7 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from "@ant-design/icons";
+import Login from "../components/auth/Login";
 
 const menuItems = [
   { label: "Food", key: "food" },
@@ -17,6 +18,16 @@ const menuItems = [
 
 function Layout() {
   const [open, setOpen] = useState(false);
+
+  const [openLogin, setOpenLogin]=useState(false);
+  const handleLoginDrawer=()=>{
+    setOpenLogin(!openLogin);
+
+  }
+  const onCloseLogin=()=>{
+     setOpenLogin(false);
+  }
+
 
   const handleDrawer = () => {
     setOpen(!open);
@@ -36,10 +47,19 @@ function Layout() {
           <Flex align="center" gap="middle">
             <Button shape="circle" icon={<HeartOutlined />} />
             <Button shape="circle" icon={<ShoppingCartOutlined />} />
-            <Avatar icon={<UserOutlined />} />
+            <Avatar onClick={handleLoginDrawer} icon={<UserOutlined />} />
           </Flex>
         </Flex>
       </Container>
+      <Drawer
+        title="Login"
+        placement='right'
+        closable={true}
+        onClose={onCloseLogin}
+        open={openLogin}
+      >
+       <Login/>
+      </Drawer>
       <Drawer
         title="Categories"
         placement='left'
