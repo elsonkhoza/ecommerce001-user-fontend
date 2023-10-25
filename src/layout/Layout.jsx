@@ -10,6 +10,7 @@ import {
   MenuFoldOutlined,
 } from "@ant-design/icons";
 import Login from "../components/auth/Login";
+import Register from "../components/auth/Register";
 
 const menuItems = [
   { label: "Food", key: "food" },
@@ -58,7 +59,7 @@ function Layout() {
         onClose={onCloseLogin}
         open={openLogin}
       >
-       <Login/>
+       <Login setOpenLogin={setOpenLogin}/>
       </Drawer>
       <Drawer
         title="Categories"
